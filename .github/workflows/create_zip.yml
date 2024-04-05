@@ -19,6 +19,9 @@ jobs:
     - name: Create Zip File
       run: zip -r my_archive.zip .
 
+    - name: Check Git Status
+      run: git status
+
     - name: Add Zip File to Repository
       uses: ad-m/github-push-action@master
       with:
