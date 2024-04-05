@@ -1,0 +1,30 @@
+name: Create and Add Zip File
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name if necessary
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Create Zip File
+      run: zip -r my_archive.zip .
+
+    - name: Move Zip File
+      run: mv my_archive.zip $GITHUB_WORKSPACE
+
+    - name: Add Zip File to Repository
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+        directory: .
+
+    - name: Cleanup
+      run: rm my_archive.zip
