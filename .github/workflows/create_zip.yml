@@ -19,8 +19,11 @@ jobs:
     - name: Create Zip File
       run: zip -r my_archive.zip .
 
-    - name: Check Git Status
-      run: git status
+    - name: Add Zip File to Staging Area
+      run: git add my_archive.zip
+
+    - name: Commit Changes
+      run: git commit -m "Add my_archive.zip"
 
     - name: Add Zip File to Repository
       uses: ad-m/github-push-action@master
