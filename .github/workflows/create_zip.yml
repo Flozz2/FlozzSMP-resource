@@ -3,7 +3,7 @@ name: Create and Add Zip File
 on:
   push:
     branches:
-      - main  # Adjust the branch name if necessary
+      - main
 
 jobs:
   build:
@@ -15,9 +15,6 @@ jobs:
 
     - name: Create Zip File
       run: zip -r my_archive.zip .
-
-    - name: Move Zip File
-      run: mv my_archive.zip $GITHUB_WORKSPACE
 
     - name: Add Zip File to Repository
       uses: ad-m/github-push-action@master
