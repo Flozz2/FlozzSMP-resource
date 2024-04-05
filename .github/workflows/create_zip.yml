@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Create Zip File
-      run: zip -r my_archive.zip . -x \*.zip -x ".git/*" -x ".github/*"
+      run: zip -r my_archive.zip . -x \*.zip -x ".git/" -x ".github/"
 
     - name: Set Git User Identity
       run: |
