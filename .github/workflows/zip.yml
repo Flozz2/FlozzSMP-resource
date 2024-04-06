@@ -2,6 +2,8 @@ name: Create Archive
 on: [push]
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -23,3 +25,6 @@ jobs:
         git add -A
         git commit -m "new pack"
         git push --force
+      with:
+        github_token: ${{ secrets.PAT2 }}
+        branch: main
