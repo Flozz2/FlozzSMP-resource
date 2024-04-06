@@ -20,7 +20,7 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
-        exclusions: '*.git*'
+        exclusions: '*.git* *.zip'
 
     - name: Set Git User Identity
       run: |
@@ -28,10 +28,10 @@ jobs:
         git config user.name "Flozz2"
 
     - name: Add Zip File to Staging Area
-      run: git add my_archive.zip
+      run: git add release.zip
 
     - name: Commit Changes
-      run: git commit -m "Add my_archive.zip"
+      run: git commit -m "Add release.zip"
 
     - name: Add Zip File to Repository
       uses: ad-m/github-push-action@master
@@ -41,4 +41,4 @@ jobs:
         directory: .
 
     - name: Cleanup
-      run: rm my_archive.zip
+      run: rm release.zip
