@@ -23,6 +23,3 @@ jobs:
         git add -A
         git commit -m "new pack"
         git push --force
-      with:
-        github_token: ${{ secrets.PAT2 }}
-        branch: main
