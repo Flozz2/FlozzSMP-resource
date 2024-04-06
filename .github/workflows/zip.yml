@@ -1,25 +1,44 @@
-name: Create Archive
-on: [push]
+name: Create and Add Zip File
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build:
+    permissions:
+      contents: write
+
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
+    - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: pull latest and remove old file from repo
-      run: |
-        git config --global user.name "Flozz2"
-        git config --global user.email "fzarbo2007@gmail.com"
-        git config pull.rebase false
-        git pull
-        rm -f release.zip
-    - name: Archive Release
+
+    - name: Create Zip File
       uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
         exclusions: '*.git*'
-    - name: push changes to remote
+
+    - name: Set Git User Identity
       run: |
-        git add -A
-        git commit -m "new pack"
-        git push --force
+        git config user.email "fzarbo2007@gmail.com"
+        git config user.name "Flozz2"
+
+    - name: Add Zip File to Staging Area
+      run: git add my_archive.zip
+
+    - name: Commit Changes
+      run: git commit -m "Add my_archive.zip"
+
+    - name: Add Zip File to Repository
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT2 }}
+        branch: main
+        directory: .
+
+    - name: Cleanup
+      run: rm my_archive.zip
